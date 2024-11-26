@@ -1,0 +1,63 @@
+<app-header></app-header>
+<div class="container mb-3">
+    <div class="row">
+        <div class="col-md-15 mt-3">
+            <div class="card ">
+                <div class="card-body ">
+                    <div class="card-titel">
+                        Inserta un nuevo Empleado
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-sm-4">
+                            <input type="text" [(ngModel)]="selectedEmployee.Nombre" placeholder="Nombre"
+                                class="form-control">
+                        </div>
+                        <div class="col-sm">
+                            <input type="text" [(ngModel)]="selectedEmployee.Correo" placeholder="Correo"
+                                class="form-control">
+                        </div>
+                        <div class="col-sm">
+                            <input type="text" [(ngModel)]="selectedEmployee.Telefono" placeholder="Telefono"
+                                class="form-control">
+                        </div>
+                        <div class="col-sm">
+                            <input type="text" [(ngModel)]="selectedEmployee.Cargo" placeholder="Cargo"
+                                class="form-control">
+                        </div>
+                        <div class="col-smS" *ngIf="selectedEmployee.id !==0">
+                            <div class="form-check form-check-inline">
+                                <input [(ngModel)]="selectedEmployee.EstadoUsuario" class="form-check-input"
+                                    type="radio" value="Empleado Activo" checked>
+                                <label class="form-check-label" for="inlineRadio1">Activo</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input [(ngModel)]="selectedEmployee.EstadoUsuario" class="form-check-input"
+                                    type="radio" value="Empleado Inactivo">
+                                <label class="form-check-label" for="inlineRadio2">Inactivo</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group mt-2" role="group" aria-label="Basic mixed styles example">
+                        <button *ngIf="selectedEmployee.id ==0" (click)="add()" class="btn btn-primary"> Guardar
+                        </button>
+                        <button *ngIf="selectedEmployee.id !==0" (click)="edit(selectedEmployee)"
+                            class="btn btn-primary"> Editar </button>
+                        <button *ngIf="selectedEmployee.id !==0" class="btn btn-danger"
+                            (click)="delete(selectedEmployee)"> Borrar </button>
+                        <button *ngIf="selectedEmployee.id !==0" (click)="cancelar()" class="btn btn-secondary">
+                            Cancelar </button>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="list-group mt-3">
+                <li *ngFor="let employee of employeeArray" class="list-group-item list-group-item-action"
+                    (click)="openForEdit(employee)" [class.active]="employee == selectedEmployee">
+                    <span class="badge bg-primary">{{ employee.id }}</span>
+                    | {{ employee.Nombre }} | {{ employee.Correo }} | {{ employee.Telefono }}
+                    | {{ employee.Cargo }} | {{ employee.EstadoUsuario }} |
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
