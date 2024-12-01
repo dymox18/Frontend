@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit {
   }
 //borrando
   delete(employee:Employee){
-    if(confirm('¿Estás seguro que deseas Eliminar este Empleado?')){
+    if(confirm('¿Estás seguro de que deseas Eliminar a este Empleado?')){
       this.apiservice.deletePersonal(employee.id).subscribe((res)=>{
         this.getPersonals();
       })
@@ -57,6 +57,8 @@ export class DashboardComponent implements OnInit {
   }
 
   cancelar(){
-    window.location.reload();
+    if(confirm('¿Estás seguro de que deseas Cancelar? ¡¡¡Se perderán los datos no guardados!!!')){
+      window.location.reload();
+     }
   }
 }

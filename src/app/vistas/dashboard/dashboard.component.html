@@ -5,7 +5,7 @@
             <div class="card ">
                 <div class="card-body mb-2">
                     <div class="card-titel mb-2">
-                        Inserta un nuevo Empleado
+                         Inserta un nuevo Empleado
                     </div>
                     <div class="row  g-2">
                         <div class="col-sm-4">
@@ -49,9 +49,11 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-hover user-select-none mt-3">
+            <div class="rounded">
+            <table class="table table-bordered table-striped table-hover user-select-none mt-3">
             <thead class="">
                 <tr class="">
+                    <th>#</th>
                     <th> Id </th>
                     <th> Nombre </th>
                     <th> Correo </th>
@@ -60,10 +62,11 @@
                     <th> Estado </th>
                 </tr>
             </thead>
-            <tbody class="">
+            <tbody class="table-group-divider">
                 
-                <tr *ngFor="let employee of employeeArray" class=""
+                <tr *ngFor="let employee of employeeArray;let indice = index" class="" 
                     (click)="openForEdit(employee)" [class.active]="employee == selectedEmployee">
+                    <td><samp class="">{{indice+1}}</samp>
                     <td><span class="badge bg-primary"> {{ employee.id }}</span>  </td>
                     <td> {{ employee.Nombre }}  </td> 
                     <td> {{ employee.Correo }}  </td>  
