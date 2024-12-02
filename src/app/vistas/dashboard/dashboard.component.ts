@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,OnDestroy ,OnInit } from '@angular/core';
 import { Employee } from '../../models/employee';
 import { ApiService } from '../../servicios/api/api.service';
+import { User } from 'src/app/models/user';
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -9,16 +12,27 @@ import { ApiService } from '../../servicios/api/api.service';
   providers: [ApiService],
 })
 
-export class DashboardComponent implements OnInit {
-
+export class DashboardComponent implements OnInit, OnDestroy {
   employeeArray: Employee[] =[]; 
+  userLoginOn:boolean=false;
+  userData?:User;
 
+  
   constructor(private apiservice:ApiService){}
-
   selectedEmployee: Employee = new Employee();
 
   ngOnInit(){
     this.getPersonals();
+    this.apiservice.currentUserLoginOn.subscribe({
+      next:(userLoginOn) => {
+        this.userLoginOn=userLoginOn;
+      }
+    });  
+    this.apiservice.currentUserData.subscribe({
+      next:(userData) => {
+        this.userData=userData;
+      }
+    });
   }
 //cargando el personal
    getPersonals(){
@@ -61,4 +75,11 @@ export class DashboardComponent implements OnInit {
       window.location.reload();
      }
   }
+
+  ngOnDestroy(): void {
+    this.apiservice.currentUserData.unsubscribe();
+    this.apiservice.currentUserLoginOn.unsubscribe();
+  }
+
+
 }
