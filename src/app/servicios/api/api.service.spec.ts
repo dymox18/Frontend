@@ -16,7 +16,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(credentials:LoginRequest):Observable<User>{                                 /*tipo de dato any (general) */
-    return this.http.get<User>('././assets/data.json').pipe(
+    return this.http.get<User>(`/api/Usuarios`).pipe(
       tap( userData => {
         this.currentUserData.next(userData);
         this.currentUserLoginOn.next(true);

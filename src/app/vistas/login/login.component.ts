@@ -35,13 +35,13 @@ export class LoginComponent {
             },
             complete:() => {
               console.info("Login Completo");
-              this.router.navigateByUrl('/inicio');
+              this.router.navigateByUrl('/login');
               this.loginFrom.reset();
             }
           })
         }else{
           this.loginFrom.markAllAsTouched();
-          /*alert("Error al ingresar los datos");*/
+          alert("Error al ingresar los datos");
       }
       }
 

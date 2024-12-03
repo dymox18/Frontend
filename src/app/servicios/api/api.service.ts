@@ -30,30 +30,31 @@ export class ApiService {
 
 
     /*Login*/
-  currentUserLoginOn:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  currentUserData : BehaviorSubject<User> = new BehaviorSubject<User>({id:0, email:''});  
-  login(credentials:LoginRequest):Observable<User>{                                 /*tipo de dato any (general) */
-    return this.http.get<User>('././assets/data.json').pipe(
-      tap( userData => {
-        this.currentUserData.next(userData);
-        this.currentUserLoginOn.next(true);
-      }),
-      catchError(this.handleError)
-    );
-  }
-  /*capturando error */
-  private handleError(error:HttpErrorResponse){
-    if(error.status===0){
-      console.error('Se ha producio un error', error.error);
-    }else{
-      console.error('Backend retornó el codigo de estado',error.status, error.error);
+    currentUserLoginOn:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    currentUserData : BehaviorSubject<User> = new BehaviorSubject<User>({id:0, email:''});
+    login(credentials:LoginRequest):Observable<User>{                                 /*tipo de dato any (general) */
+      return this.http.get<User>(`/api/Usuarios`).pipe(
+        tap( userData => {
+          this.currentUserData.next(userData);
+          this.currentUserLoginOn.next(true);
+        }),
+        catchError(this.handleError)
+      );
     }
-    return throwError(()=> new Error('Algo fallo, por favor intente de nuevo'));
+    /*capturando error */
+    private handleError(error:HttpErrorResponse){
+      if(error.status===0){
+        console.error('Se ha producio un error', error.error);
+      }else{
+        console.error('Backend retornó el codigo de estado',error.status, error.error);
+      }
+      return throwError(()=> new Error('Algo fallo, por favor intente de nuevo'));
+    }
+    get userData():Observable<User>{
+      return this.currentUserData.asObservable();
+    }
+    get userUserLogin():Observable<boolean>{
+      return this.currentUserLoginOn.asObservable();
+    }
+  
   }
-  get userData():Observable<User>{
-    return this.currentUserData.asObservable();
-  }
-  get userUserLogin():Observable<boolean>{
-    return this.currentUserLoginOn.asObservable();
-  }
-}

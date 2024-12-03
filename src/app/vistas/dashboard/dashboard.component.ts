@@ -12,17 +12,21 @@ import { User } from 'src/app/models/user';
   providers: [ApiService],
 })
 
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
   employeeArray: Employee[] =[]; 
+  
+
   userLoginOn:boolean=false;
   userData?:User;
 
   
   constructor(private apiservice:ApiService){}
   selectedEmployee: Employee = new Employee();
+ 
 
   ngOnInit(){
     this.getPersonals();
+   
     this.apiservice.currentUserLoginOn.subscribe({
       next:(userLoginOn) => {
         this.userLoginOn=userLoginOn;
@@ -76,10 +80,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
      }
   }
 
-  ngOnDestroy(): void {
-    this.apiservice.currentUserData.unsubscribe();
-    this.apiservice.currentUserLoginOn.unsubscribe();
-  }
 
+
+
+
+
+
+
+
+
+
+
+
+//cargando el Usuarios
 
 }
+ 
+  
+
+
+
