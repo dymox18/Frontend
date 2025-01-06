@@ -1,24 +1,81 @@
+<!-- Contenedor principal con fondo y estilo moderno -->
 <app-header></app-header>
-<form [formGroup]="loginFrom">
-  
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email </label>
-      <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      <div *ngIf="email.invalid && (email.dirty || email.touched)"
-          class="text-danger">
-        <div *ngIf="email.errors?.['required']">
-          El Email es requerido.
-        </div>
-        <div *ngIf="email.errors?.['email']">
-          El Email debe de tener un formato válido.
-        </div>
+<div class="container mt-5 d-flex align-items-center justify-content-center">
+  <div class="card shadow-lg" style="max-width: 400px; width: 100%;">
+    <!-- Encabezado del card con logo -->
+    <div class="card-header bg-white text-center border-0 pt-4">
+      
+      <h2 class="text-primary mb-0 mt-3">Iniciar Sesión</h2>
+      
+    </div>
+
+    <!-- Cuerpo del formulario -->
+    <div class="card-body px-4 py-4">
+      <form [formGroup]="loginFrom">
         
-      </div>
+        <!-- Campo de Email con icono -->
+        <div class="mb-4 position-relative">
+          <label for="exampleInputEmail1" class="form-label text-secondary">
+            <i class="bi bi-envelope-fill me-2"></i>Email
+          </label>
+          <input 
+            formControlName="email" 
+            type="email" 
+            class="form-control form-control-lg bg-light" 
+            id="exampleInputEmail1" 
+            placeholder="nombre@ejemplo.com"
+            [ngClass]="{'is-invalid': email.invalid && (email.dirty || email.touched)}"
+          >
+          <div *ngIf="email.invalid && (email.dirty || email.touched)"
+              class="invalid-feedback">
+            <div *ngIf="email.errors?.['required']">
+              El Email es requerido.
+            </div>
+            <div *ngIf="email.errors?.['email']">
+              El Email debe tener un formato válido.
+            </div>
+          </div>
+        </div>
+
+        <!-- Campo de Password con icono y botón para mostrar/ocultar -->
+        <div class="mb-4 position-relative">
+          <label for="exampleInputPassword1" class="form-label text-secondary">
+            <i class="bi bi-lock-fill me-2"></i>Contraseña
+          </label>
+          <div class="input-group">
+            <input 
+              formControlName="password" 
+              [type]="showPassword ? 'text' : 'password'" 
+              class="form-control form-control-lg bg-light" 
+              id="exampleInputPassword1"
+              placeholder="••••••••"
+            >
+            <button 
+              class="btn btn-light border" 
+              type="button"
+              (click)="showPassword = !showPassword">
+              <i [class]="showPassword ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'">?</i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mensaje de error -->
+        <div *ngIf="loginError" class="alert alert-danger py-2 mb-4">
+          <i class="bi bi-exclamation-circle-fill me-2"></i>
+          {{loginError}}
+        </div>
+
+        <!-- Botón de submit -->
+        <button 
+          type="submit" 
+          (click)="login()" 
+          class="btn btn-primary btn-lg w-100 mb-3 position-relative">
+          <span>Iniciar Sesión</span>
+          <i class="bi bi-arrow-right-circle-fill position-absolute end-0 me-3"></i>
+        </button>
+      </form>
     </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input formControlName="password" type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <p class="text-danger">{{loginError}}</p>
-    <button type="submit" (click)="login()" class="btn btn-primary">Iniciar Sesión</button>
-  </form>
+  </div>
+</div>
+
+<!-- Estilos adicionales -->

@@ -11,6 +11,8 @@ import { HeaderComponent } from './plantillas/header/header.component';
 import { FooterComponent } from './plantillas/footer/footer.component';
 import { DashboardComponent } from './vistas/dashboard/dashboard.component';
 import { LoginComponent } from './vistas/login/login.component';
+import { MaintenanceComponent } from './components/maintenance/maintenance.component';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { LoginComponent } from './vistas/login/login.component';
     FooterComponent,
     routingComponents,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    MaintenanceComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,
