@@ -1,0 +1,1 @@
+creacion de crud para fincionalidad de la lista del fron end
